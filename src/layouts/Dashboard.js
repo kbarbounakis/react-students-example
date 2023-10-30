@@ -1,16 +1,16 @@
 import React from "react";
 import { Container, Row, Col, Navbar, NavDropdown, Nav } from "react-bootstrap";
-
+import Home from "../components/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { UserService } from "../services/UserService";
-import Home from "../components/Home";
 import LoginCallback from "../components/LoginCallback";
+import { useTranslation } from "react-i18next";
 
 const routes = [
   {
     path: "/",
     exact: true,
-    component: Home,
+    element: <Home></Home>,
   },
   {
     path: "/login/callback",
@@ -19,6 +19,7 @@ const routes = [
 ];
 
 const Dash = () => {
+  const { t } = useTranslation();
   const userService = new UserService();
   const currentUser = userService.getCurrentUser();
   if (currentUser == null) {
@@ -32,7 +33,7 @@ const Dash = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link href="#home">Home</Nav.Link>
+              <Nav.Link href="#home">{t("Home")}</Nav.Link>
               <Nav.Link href="#link">Link</Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
