@@ -5,17 +5,22 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { UserService } from "../services/UserService";
 import LoginCallback from "../components/LoginCallback";
 import { useTranslation } from "react-i18next";
+import { useLocation } from 'react-router-dom';
 
 const routes = [
   {
-    path: "/",
-    exact: true,
-    element: <Home></Home>,
+    path: "/auth/callback",
+    element: <LoginCallback />
   },
   {
-    path: "/login/callback",
-    component: LoginCallback,
+    path: "/",
+    exact: true,
+    element: <Home />,
   },
+  {
+    path: "/auth/login",
+    component: <LoginCallback />,
+  }
 ];
 
 const Dash = () => {
@@ -29,12 +34,12 @@ const Dash = () => {
     <>
       <Router>
         <Navbar bg="light" expand="lg">
-          <Navbar.Brand href="#home">Students App</Navbar.Brand>
+          <Navbar.Brand href="/">Students App</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="mr-auto">
-              <Nav.Link href="#home">{t("Home")}</Nav.Link>
-              <Nav.Link href="#link">Link</Nav.Link>
+              <Nav.Link href="/">{t("Home")}</Nav.Link>
+              <Nav.Link href="./link">Link</Nav.Link>
               <NavDropdown title="Dropdown" id="basic-nav-dropdown">
                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                 <NavDropdown.Item href="#action/3.2">
@@ -50,8 +55,8 @@ const Dash = () => {
               </NavDropdown>
             </Nav>
             <Nav>
-              <Nav.Link href="/auth/login?client_id=9165351833584149&scope=profile&redirect_uri=/login/callback">
-                User
+              <Nav.Link href={userService.loginURI}>
+                {t("Login")}
               </Nav.Link>
             </Nav>
           </Navbar.Collapse>
@@ -59,13 +64,13 @@ const Dash = () => {
         <Container fluid>
           <Row>
             <Col className="pt-3" xs={10} id="page-content-wrapper">
-              <Routes>
+            <Routes>
                 {routes.map((route) => (
                   <Route
                     key={route.path}
                     path={route.path}
                     exact={route.exact}
-                    render={(props) => <route.component {...props} />}
+                    element={route.element}
                   />
                 ))}
               </Routes>

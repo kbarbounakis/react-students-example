@@ -1,7 +1,7 @@
 {
-  "name": "react",
+  "name": "react-students",
   "version": "1.0.0",
-  "description": "React example starter project",
+  "description": "Universis students for react starter project",
   "keywords": [
     "react",
     "starter"
@@ -23,10 +23,11 @@
   },
   "devDependencies": {
     "@babel/runtime": "7.13.8",
+    "cross-env": "^7.0.3",
     "typescript": "4.1.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "cross-env PORT=7001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

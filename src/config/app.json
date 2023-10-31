@@ -1,0 +1,31 @@
+{
+    "settings": {
+        "app": {
+            "image": null,
+            "title": "Students App"
+        },
+        "remote": {
+            "server": "https://api.universis.io/api/"
+        },
+        "auth": {
+            "authorizeURL": "https://users.universis.io/authorize",
+            "logoutURL": "https://users.universis.io/logout?continue=http://localhost:7001/#/auth/login",
+            "userProfileURL": "https://users.universis.io/me",
+            "oauth2": {
+                "tokenURL": "https://users.universis.io/tokeninfo",
+                "clientID": "6065706863394382",
+                "callbackURL": "http://localhost:7001/auth/callback/",
+                "scope": [
+                    "students"
+                ]
+            }
+        },
+        "i18n": {
+            "locales": [
+                "en",
+                "el"
+            ],
+            "defaultLocale": "el"
+        }
+    }
+}
