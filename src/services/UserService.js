@@ -4,12 +4,17 @@ import { ConfigurationService } from './ConfigurationService';
 
 export class UserService {
 
-  constructor() {
-    this.configuration = new ConfigurationService();
+  /**
+   * @param {ConfigurationService} configuration
+   * @param {ReactDataContext} context
+   */
+  constructor(configuration, context) {
+    this.configuration = configuration;
+    this.context = context;
   }
 
-  getCurrentUser() {
-    const currentUserValue = localStorage.getItem("currentUser");
+  getUser() {
+    const currentUserValue = sessionStorage.getItem("currentUser");
     let currentUser = null;
     if (currentUserValue) {
       currentUser = JSON.parse(currentUserValue);
@@ -17,12 +22,17 @@ export class UserService {
     return currentUser;
   }
 
+  logoutUser() {
+    sessionStorage.removeItem("currentUser");
+    const { logoutURL } = this.configuration.settings.auth;
+    window.location.href = logoutURL;
+  }
+
   // eslint-disable-next-line camelcase
   async tryCurrentUser(access_token) {
-    const context = new ReactDataContext(this.configuration.settings.remote.server);
-    context.setBearerAuthorization(access_token);
+    this.context.setBearerAuthorization(access_token);
     // get user
-    const user = await context
+    const user = await this.context
       .model("Users/Me")
       .asQueryable()
       .expand("groups")
@@ -36,7 +46,7 @@ export class UserService {
       access_token: access_token
     });
     // set user
-    localStorage.setItem("currentUser", JSON.stringify(user));
+    sessionStorage.setItem("currentUser", JSON.stringify(user));
     // and return
     return user;
   }

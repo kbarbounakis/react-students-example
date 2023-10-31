@@ -1,21 +1,21 @@
 import React from 'react'
 import { UserService } from '../services/UserService'
-import { Navigate } from 'react-router'
+import { Navigate } from 'react-router';
+import { withRouter } from '../utils';
 
-
-export default class LoginCallback extends React.Component {
+export class LoginCallback extends React.Component {
   constructor(props) {
     super(props)
     this.state = { user: null }
   }
 
   componentDidMount() {
-    const location = window.location;
+    const { location, configuration, context } = this.props.router;
     const queryParams = new URLSearchParams(location.search)
     const accessToken = queryParams.get('access_token')
     if (accessToken != null) {
       // try current user
-      new UserService().tryCurrentUser(accessToken).then((user) => {
+      new UserService(configuration, context).tryCurrentUser(accessToken).then((user) => {
         this.setState({
           user
         })
@@ -25,8 +25,10 @@ export default class LoginCallback extends React.Component {
 
   render() {
     if (this.state.user) {
-      return <Navigate to="/"></Navigate>
+      return <Navigate to="/dashboard"></Navigate>
     }
     return <></>
   }
 }
+
+export const LoginCallbackWithRouter = withRouter(LoginCallback)

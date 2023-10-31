@@ -9,7 +9,7 @@
         },
         "auth": {
             "authorizeURL": "https://users.universis.io/authorize",
-            "logoutURL": "https://users.universis.io/logout?continue=http://localhost:7001/#/auth/login",
+            "logoutURL": "https://users.universis.io/logout?continue=http://localhost:7001/",
             "userProfileURL": "https://users.universis.io/me",
             "oauth2": {
                 "tokenURL": "https://users.universis.io/tokeninfo",

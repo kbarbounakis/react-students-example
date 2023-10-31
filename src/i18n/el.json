@@ -1,6 +1,9 @@
 {
   "translation": {
     "Login": "Είσοδος",
-    "Home": "Αρχική"
+    "Home": "Αρχική",
+    "My Recent Grades": "Οι πρόσφατοι βαθμοί μου",
+    "Dashboard": "Πίνακας Ελέγχου",
+    "Logout": "Αποσύνδεση"
   }
 }
