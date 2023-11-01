@@ -13,10 +13,10 @@ const Home = () => {
     <>
       <Row>
         <Col className="mt-5 text-center">
-          <p class="h5 font-weight-normal">
+          <p className="h5 font-weight-normal">
             this application is an example of <a href="https://gitlab.com/universis/universis-students">@universis/students app</a> dashboard for React
           </p>
-          <img class="p-4" height="480" src='/assets/img/students_screenshot.jpg'></img>
+          <img className="p-4" height="480" src='/assets/img/students_screenshot.jpg'></img>
         </Col>
       </Row>
       <Row>

@@ -52,7 +52,7 @@ const Dash = () => {
               {
                 (currentUser != null) ?
                 (
-                  <NavDropdown title={currentUser.name} id="basic-nav-dropdown">
+                  <NavDropdown title={currentUser.name} id="user-dropdown">
                     <NavDropdown.Item href="/auth/logout">
                     {t("Logout")}
                     </NavDropdown.Item>
@@ -62,10 +62,10 @@ const Dash = () => {
                   {t("Login")}
                 </Nav.Link>
               }
-              <NavDropdown title={ISO6391.getNativeName(configuration.settings.i18n.defaultLocale)} id="basic-nav-dropdown">
+              <NavDropdown title={ISO6391.getNativeName(configuration.settings.i18n.defaultLocale)} id="language-dropdown">
                 {
                   configuration.settings.i18n.locales.map((locale) => (
-                    <NavDropdown.Item href={"/language/set/" + locale}>
+                    <NavDropdown.Item key={locale} href={"/language/set/" + locale}>
                       {ISO6391.getNativeName(locale)}
                     </NavDropdown.Item>
                   ))

@@ -13,7 +13,7 @@ const StudentProgress = ({ student }) => {
     const { t } = useTranslation();
     return (
         <>
-            <div class="d-flex justify-content-between justify-content-center align-items-center">
+            <div className="d-flex justify-content-between justify-content-center align-items-center">
               <div className='mx-4 w-100'>
                 <ProgressBar className='progress-semester' striped={false} animated={false} variant='theme' now={studentProgress} />
               </div>
@@ -21,9 +21,9 @@ const StudentProgress = ({ student }) => {
                 <FontAwesomeIcon color="gainsboro" icon={faGraduationCap} size="4x" />
               </div>
             </div>
-            <div class="d-flex justify-content-center">
+            <div className="d-flex justify-content-center">
                 <div>
-                    <h4 class="font-weight-normal">{semester}/{t("Semester")}</h4>
+                    <h4 className="font-weight-normal">{semester}/{t("Semester")}</h4>
                 </div>
             </div>
         </>
