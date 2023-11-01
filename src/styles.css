@@ -3,3 +3,8 @@
   font-family: sans-serif;
   text-align: center;
 }
+
+.progress-semester {
+  height: .5rem;
+  opacity: 65%;
+}
