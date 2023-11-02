@@ -1,5 +1,5 @@
-import React, { useContext } from "react";
-import { Container, Row, Col, Navbar, NavDropdown, Nav } from "react-bootstrap";
+import React, { useContext, useState, setState } from "react";
+import { Container, Row, Col, Navbar, NavDropdown, Nav  } from "react-bootstrap";
 import Home from "../components/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { UserService } from "../services/UserService";
@@ -13,7 +13,7 @@ import { LogoutWithRouter } from '../components/Logout';
 const routes = [
   {
     path: "/auth/callback",
-    element: <LoginCallbackWithRouter />
+    element: <LoginCallbackWithRouter stateChanger={setState} />
   },
   {
     path: "/auth/logout",
@@ -32,12 +32,10 @@ const routes = [
 
 const Dash = () => {
   const { t } = useTranslation();
+  
   const {configuration, context} = useContext(ApplicationContext);
   const userService = new UserService(configuration, context);
-  const currentUser = userService.getUser();
-  if (currentUser == null) {
-    // return userService.redirectToLogin();
-  }
+  const [user, setUser] = useState(userService.getUser());
   return (
     <>
       <Router>
@@ -50,13 +48,17 @@ const Dash = () => {
             </Nav>
             <Nav>
               {
-                (currentUser != null) ?
+                (user != null) ?
                 (
-                  <NavDropdown title={currentUser.name} id="user-dropdown">
-                    <NavDropdown.Item href="/auth/logout">
-                    {t("Logout")}
-                    </NavDropdown.Item>
-                  </NavDropdown>
+                  <>
+                    <Nav.Link href="#">{t("Registrations")}</Nav.Link>
+                    <Nav.Link href="#">{t("Grades")}</Nav.Link>
+                    <NavDropdown title={user.name} id="user-dropdown">
+                      <NavDropdown.Item href="/auth/logout">
+                      {t("Logout")}
+                      </NavDropdown.Item>
+                    </NavDropdown>
+                  </>
                 ) :
                 <Nav.Link href={userService.loginURI}>
                   {t("Login")}

@@ -71,7 +71,7 @@ const RecentGrades = ({ student }) => {
                                 </Card.Text>
                             </div>
                             <div className='ml-auto'>
-                                <span className={`text-secondary h1 font-weight-normal ${item.isPassed ? 'text-success' : 'text-secondary'}`}>{item.formattedGrade}</span>
+                                <span className={`text-secondary h1 font-weight-normal ${item.isPassed ? 'text-success' : 'text-danger'}`}>{item.formattedGrade}</span>
                             </div>
                         </div>
                     </Card.Body>
