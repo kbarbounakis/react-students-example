@@ -10,7 +10,7 @@ i18n
       en,
       el,
     },
-    lng: "el",
+    lng: localStorage.getItem("currentLang") || "el",
     fallbackLng: "en",
     debug: false,
     interpolation: {

@@ -1,4 +1,4 @@
-import React, { useContext, useState, setState } from "react";
+import React, { useContext, useState } from "react";
 import { Container, Row, Col, Navbar, NavDropdown, Nav  } from "react-bootstrap";
 import Home from "../components/Home";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -6,36 +6,37 @@ import { UserService } from "../services/UserService";
 import {LoginCallbackWithRouter} from "../components/LoginCallback";
 import { useTranslation } from "react-i18next";
 import { ApplicationContext } from '../ApplicationContext';
-import * as ISO6391 from 'iso-639-1';
 import StudentDashboard from '../components/StudentDashboard'
 import { LogoutWithRouter } from '../components/Logout';
-
-const routes = [
-  {
-    path: "/auth/callback",
-    element: <LoginCallbackWithRouter stateChanger={setState} />
-  },
-  {
-    path: "/auth/logout",
-    element: <LogoutWithRouter />
-  },
-  {
-    path: "/",
-    exact: true,
-    element: <Home />,
-  },
-  {
-    path: "/dashboard",
-    element: <StudentDashboard />
-  }
-];
+import { Language } from '../components/Language';
 
 const Dash = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   
   const {configuration, context} = useContext(ApplicationContext);
   const userService = new UserService(configuration, context);
-  const [user, setUser] = useState(userService.getUser());
+  const [user, setUser] = useState(userService.user);
+
+  const routes = [
+    {
+      path: "/auth/callback",
+      element: <LoginCallbackWithRouter onUserChange={setUser} />
+    },
+    {
+      path: "/auth/logout",
+      element: <LogoutWithRouter />
+    },
+    {
+      path: "/",
+      exact: true,
+      element: <Home />,
+    },
+    {
+      path: "/dashboard",
+      element: <StudentDashboard />
+    }
+  ];
+
   return (
     <>
       <Router>
@@ -64,15 +65,7 @@ const Dash = () => {
                   {t("Login")}
                 </Nav.Link>
               }
-              <NavDropdown title={ISO6391.getNativeName(configuration.settings.i18n.defaultLocale)} id="language-dropdown">
-                {
-                  configuration.settings.i18n.locales.map((locale) => (
-                    <NavDropdown.Item key={locale} href={"/language/set/" + locale}>
-                      {ISO6391.getNativeName(locale)}
-                    </NavDropdown.Item>
-                  ))
-                }
-              </NavDropdown>
+              <Language />
             </Nav>
           </Navbar.Collapse>
         </Navbar>

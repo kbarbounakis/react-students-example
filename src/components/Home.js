@@ -1,17 +1,16 @@
 import React from "react";
 import { useContext } from 'react';
 import { useTranslation } from "react-i18next";
-import { Row, Col, Button } from "react-bootstrap";
+import { Col } from "react-bootstrap";
 import { UserService } from '../services/UserService';
 import { ApplicationContext } from '../ApplicationContext';
-import { Navigate, useLocation } from 'react-router';
+import { Navigate } from 'react-router';
 
 const Home = () => {
   const { t } = useTranslation();
-  const location = useLocation();
   const {configuration, context} = useContext(ApplicationContext);
   const userService = new UserService(configuration, context);
-  const user = userService.getUser();
+  const user = userService.user;
   if (user) {
     return (
       <>

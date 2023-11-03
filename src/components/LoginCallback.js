@@ -7,6 +7,7 @@ export class LoginCallback extends React.Component {
   constructor(props) {
     super(props)
     this.state = { user: null }
+    this.onUserChange = props.onUserChange;
   }
 
   componentDidMount() {
@@ -19,6 +20,7 @@ export class LoginCallback extends React.Component {
         this.setState({
           user
         })
+        this.onUserChange(user)
       })
     }
   }

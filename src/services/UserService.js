@@ -22,6 +22,13 @@ export class UserService {
     return currentUser;
   }
 
+  /**
+   * @returns {{name:string,alternateName:string,groups:{name:string,alternateName:string}[]}}
+   */
+  get user() {
+    return this.getUser();
+  }
+
   logoutUser() {
     sessionStorage.removeItem("currentUser");
     const { logoutURL } = this.configuration.settings.auth;
