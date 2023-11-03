@@ -1,4 +1,4 @@
-@import "../node_modules/@universis/theme/css/universis.css";
+@import "~@universis/theme/css/universis.css";
 .App {
   font-family: sans-serif;
   text-align: center;
